@@ -1,11 +1,11 @@
-package Presentacion;
+package main.java.Presentacion;
 
 import java.util.*;
 
-import Dominio.BiblioMovil;
-import Dominio.Prestamo;
-import Dominio.Sancion;
-import Dominio.Usuario;
+import main.java.Dominio.BiblioMovil;
+import main.java.Dominio.Prestamo;
+import main.java.Dominio.Sancion;
+import main.java.Dominio.Usuario;
 
 public class ClasePrincipal {
 	

@@ -1,9 +1,9 @@
-package Dominio;
+package main.java.Dominio;
 
 
 import java.util.*;
 
-import Dominio.Libro.Formato;
+import main.java.Dominio.Libro.Formato;
 
 
 public class BiblioMovil {

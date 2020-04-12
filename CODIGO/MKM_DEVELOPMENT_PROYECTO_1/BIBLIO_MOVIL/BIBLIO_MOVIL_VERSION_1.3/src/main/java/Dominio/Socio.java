@@ -1,4 +1,4 @@
-package Dominio;
+package main.java.Dominio;
 import java.util.*;
 
 public class Socio extends Usuario {
