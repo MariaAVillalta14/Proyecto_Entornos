@@ -1,6 +1,0 @@
-INDEX VERSION 1.131+E:\Proyecto\Proyecto_Entornos\CODIGO\MKM_DEVELOPMENT_PROYECTO_1\.metadata\.plugins\org.eclipse.jdt.core
-1671692264.index
-1666054289.index
-1843685820.index
-1513204285.index
-3855814407.index
