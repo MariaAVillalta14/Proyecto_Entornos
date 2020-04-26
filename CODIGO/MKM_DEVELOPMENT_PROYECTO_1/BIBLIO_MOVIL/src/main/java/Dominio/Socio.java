@@ -76,6 +76,12 @@ public class Socio extends Usuario {
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
 	}
+
+	@Override
+	public String toString() {
+		return "Socio [nombre=" + nombre + ", apellidos=" + apellidos + ", fecha_nacimiento=" + fecha_nacimiento
+				+ ", email=" + email + ", contrasenya=" + contrasenya + "]";
+	}
 	
 	
 	

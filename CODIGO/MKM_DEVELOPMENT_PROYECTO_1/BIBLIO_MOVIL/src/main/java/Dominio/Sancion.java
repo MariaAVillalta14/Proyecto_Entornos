@@ -21,6 +21,8 @@ public class Sancion {
 		this.mis_sanciones = new ArrayList<Sancion>();
 		mis_sanciones.add(new Sancion("zapatacamila@gmail.com","Cien años de soledad"));
 	}
+	
+	
 
 	public int getNumero_dias_sancion() {
 		return Numero_dias_sancion;
@@ -30,14 +32,12 @@ public class Sancion {
 		Numero_dias_sancion = numero_dias_sancion;
 	}
 	
-	
 	public int setFecha(Calendar fechaFinPrestamo, int dia)
 	{
 		Calendar fechaActual = Calendar.getInstance();
 		fechaActual.add(Calendar.DAY_OF_MONTH, dia);
 		return Numero_dias_sancion;
 	}
-	
 		
 	public String getEmailSocio() {
 		return emailSocio;
@@ -68,6 +68,16 @@ public class Sancion {
 			sancion=mis_sanciones.get(i);
 		}
 		return sancion;
+	}
+	
+	
+
+	public ArrayList<Sancion> getMis_sanciones() {
+		return mis_sanciones;
+	}
+
+	public void setMis_sanciones(ArrayList<Sancion> mis_sanciones) {
+		this.mis_sanciones = mis_sanciones;
 	}
 
 	//prueba
@@ -118,4 +128,11 @@ public class Sancion {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Sancion [Numero_dias_sancion=" + Numero_dias_sancion + ", emailSocio=" + emailSocio
+				+ ", titulo_libro_prestamo=" + titulo_libro_prestamo + ", mis_sanciones=" + mis_sanciones + "]";
+	}
+
+	
 }

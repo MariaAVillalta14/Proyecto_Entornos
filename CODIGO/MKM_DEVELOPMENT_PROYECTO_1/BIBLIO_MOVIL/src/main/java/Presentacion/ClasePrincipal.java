@@ -15,19 +15,11 @@ public class ClasePrincipal {
 	static Sancion sancion=new Sancion();
 	static boolean continuar=true;
 	static boolean continuar2=false;
-	static boolean continuar3=true;
 	static boolean corresponde=true;
-	static boolean correcto=false;
-	static boolean correcto2=false;
-	static int opcion=0;
 	static String titulo;
 	static Prestamo miPrestamo=new Prestamo();
 	static String email;
-	static Calendar fecha=GregorianCalendar.getInstance();
-	static Prestamo prestamo=new Prestamo();
-	static int anyo = fecha.get(Calendar.YEAR);
-	static int mes = fecha.get(Calendar.MONTH);
-	static int dia = fecha.get(Calendar.DAY_OF_MONTH);
+	
 	public static void main(String[] args) {
 		
 
@@ -38,6 +30,7 @@ public class ClasePrincipal {
 	
 	public static void menu()
 	{
+		int opcion=0;
 		do
 		{
 			System.out.println("****MENU PRINCIPAL*****");
@@ -143,8 +136,8 @@ public class ClasePrincipal {
 	
 	public static void accesoSocio()
 	{
-		
-		
+		boolean correcto=false;
+		boolean correcto2=false;
 		System.out.println("***ACCEDER***");
 		    System.out.println("1.Usuario"); 
 		    
@@ -192,8 +185,7 @@ public class ClasePrincipal {
 	public static void menuSocio()
 	{
 		int opcion2=0;
-		
-		
+		boolean continuar3=true;
 		do
 		{
 			System.out.println("*****MENÚ SOCIO******");
@@ -301,6 +293,14 @@ public class ClasePrincipal {
 	
 	public static void alquilarLibro()
 	{
+		
+		Calendar fecha=GregorianCalendar.getInstance();
+		int anyo = fecha.get(Calendar.YEAR);
+		int mes = fecha.get(Calendar.MONTH);
+		int dia = fecha.get(Calendar.DAY_OF_MONTH);
+		fecha.set(Calendar.SECOND,0);
+		fecha.set(Calendar.MILLISECOND, 0);
+		
 		System.out.println("¿Desea alquilar este libro? SI/NO");
 		String resp3=entrada.nextLine();
 		if(resp3.isEmpty())
@@ -331,6 +331,7 @@ public class ClasePrincipal {
 	
 	public static void devolverLibro()
 	{
+		
 		boolean repetir=false;
 		System.out.println("\n¿Quiere devolver alguno de los libros que tiene en prestamo? SI/NO");
 		String resp4=entrada.nextLine();
@@ -355,8 +356,11 @@ public class ClasePrincipal {
 					
 					miPrestamo.devolverLibro(email,librosBiblio.Libro(tituloNombreADevolver).getTitulo());
 					
+					Calendar fecha2=Calendar.getInstance();
+					fecha2.set(Calendar.SECOND,0);
+					fecha2.set(Calendar.MILLISECOND, 0);
 					
-					if(miPrestamo.obtenerFechaPrestamo(email, titulo).after(Calendar.getInstance()) == true)
+					if(miPrestamo.obtenerFechaPrestamo(email, titulo).after(fecha2) == true)
 					{
 						sancion.anyadirSancion(new Sancion(email,tituloNombreADevolver));
 					}

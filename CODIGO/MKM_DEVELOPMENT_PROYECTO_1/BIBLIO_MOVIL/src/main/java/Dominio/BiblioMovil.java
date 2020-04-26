@@ -131,7 +131,7 @@ public class BiblioMovil {
 	
 	public String Comprobar_contrasenya(String contrasenya)
 	{
-		String contrasenya1 = " ";
+		String contrasenya1 =" ";
 		for(int i=0; i<socios.size(); i++)
 		{
 			if(socios.get(i).getContrasenya().equalsIgnoreCase(contrasenya))
@@ -183,7 +183,11 @@ public class BiblioMovil {
 		}
 		return libro;
 	}
+
 	
+	
+
+
 	
 	
 }

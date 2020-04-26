@@ -26,20 +26,23 @@ public class Prestamo {
 		librosPrestados.add(new Prestamo(fecha_inicio(2020, Calendar.APRIL, 3),fecha_fin(2020,Calendar.APRIL,3),"zapatacamila@gmail.com","Cien años de soledad"));
 		librosPrestados.add(new Prestamo(fecha_inicio(2020, Calendar.JANUARY, 4),fecha_fin(2020,Calendar.JANUARY,4),"chaconkevim@gmail.com","La chica de nieve"));	
 	}
-	
+
 	public Prestamo(String emailSocio)
-	{this.emailSocio=emailSocio;
-		
+	{
+		this.emailSocio=emailSocio;	
 	}
+	
+	
 	public static Calendar fecha_inicio(int anyo, int mes,int dia)
  	{
-
  		Calendar fecha_inicio = Calendar.getInstance();
+ 		fecha_inicio.set(Calendar.SECOND,0);
+ 		fecha_inicio.set(Calendar.MILLISECOND,0);
  		fecha_inicio.set(anyo,mes, dia);	
  		Date fecha=fecha_inicio.getTime();
  		Calendar fecha_inicio1=Calendar.getInstance();
+ 		
  		fecha_inicio1.setTime(fecha);
-
  		return fecha_inicio1;
  	}
 	
@@ -73,6 +76,8 @@ public class Prestamo {
 	public static Calendar fecha_fin(int anyo,int mes, int dia)
 	{		
 		Calendar fecha_inicio=Calendar.getInstance();
+		fecha_inicio.set(Calendar.MINUTE,0);
+ 		fecha_inicio.set(Calendar.MILLISECOND,0);
 		fecha_inicio=fecha_inicio(anyo,mes,dia);
 		fecha_inicio.add(Calendar.DAY_OF_MONTH, 30);
 		Date fecha=fecha_inicio.getTime();
@@ -83,6 +88,8 @@ public class Prestamo {
 	}
 
 	public Calendar getFecha_fin() {
+
+ 		
 		return fecha_fin;
 	}
 
@@ -90,6 +97,7 @@ public class Prestamo {
 	{
 		Calendar fecha_fin;
 		fecha_fin=fecha_fin(anyo,mes,dia);
+		
 		this.fecha_fin = fecha_fin;
 		
 	}
@@ -123,7 +131,6 @@ public class Prestamo {
 	{
 		this.librosPrestados = librosPrestados;
 	}
-	
 	
 	
 	public String getEmailSocio() {
@@ -160,6 +167,8 @@ public class Prestamo {
 	public Calendar obtenerFechaPrestamo(String emailSocio,String titulo)
 	{
 		Calendar fecha=Calendar.getInstance();
+		fecha.set(Calendar.MINUTE,0);
+ 		fecha.set(Calendar.MILLISECOND,0);
 		for(int i=0; i<librosPrestados.size();i++)
 		{
 			if(librosPrestados.get(i).getEmailSocio().equalsIgnoreCase(emailSocio))
@@ -169,6 +178,7 @@ public class Prestamo {
 					fecha=librosPrestados.get(i).getFecha_fin();
 				}
 			}
+			
 			
 		}
 		return fecha;
@@ -190,6 +200,12 @@ public class Prestamo {
 			
 		}
 		return tituloCoincide;
+	}
+
+	@Override
+	public String toString() {
+		return "Prestamo [fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", librosPrestados="
+				+ librosPrestados + ", emailSocio=" + emailSocio + ", tituloLibroPrestamo=" + tituloLibroPrestamo + "]";
 	}
 	
 

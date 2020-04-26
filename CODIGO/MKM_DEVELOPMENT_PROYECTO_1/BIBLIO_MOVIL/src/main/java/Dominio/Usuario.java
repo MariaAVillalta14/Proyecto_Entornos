@@ -8,8 +8,7 @@ public class Usuario {
 	
 public Socio Registrarse(BiblioMovil socio)
 {
-	Socio misocio;
-	
+		Socio misocio;
         
 	
 		System.out.println("*****REGISTRO******");
