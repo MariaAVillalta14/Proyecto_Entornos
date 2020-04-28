@@ -14,7 +14,7 @@ public class BiblioMovilTest {
 	
 	static BiblioMovil miBiblio;
 	static ArrayList<Socio> listaSocios;
-	
+	static ArrayList<Libro> listaLibros;
 	@BeforeClass
  	public static void beforeClass() 
 	{
@@ -28,6 +28,11 @@ public class BiblioMovilTest {
 		listaSocios.add(new Socio("Antonella", "Gutierrez","12-12-1999", "anto123@gmail.com", "anto123"));
 		listaSocios.add(new Socio("Jonh", "Lopez", "30-02-1980", "jonh612@outlook.com", "J763746824"));
  		listaSocios.add(new Socio("Juan","González","14-07-1996","juang@gmail.com","123456"));
+ 		listaLibros=new ArrayList<Libro>();
+ 		listaLibros.add(new Libro("Cien años de soledad",1967,"Gabriel García Marquez","Planeta",true,Formato.DIGITAL," Es considerada una obra maestra de la literatura hispanoamericana y universal, así como una de las obras más traducidas y leidas en español"));
+ 		listaLibros.add(new Libro("El Señor de los Anillos",1954,"J. R. R. Tolkien","Acantilado",false,Formato.FISICO," El Señor de los Anillos es una novela de fantasía épica escrita por el filólogo y escritor británico J. R. R. Tolkien."));
+ 		listaLibros.add(new Libro("El Alquimista",1988,"Paulo Coelho","Alba",true,Formato.DIGITAL," Relata las aventuras de Santiago, un joven pastor andaluz que un día emprende un viaje por las arenas del desierto en busca de un tesoro."));
+ 		
 	}
 
 	@Before
@@ -57,7 +62,7 @@ public class BiblioMovilTest {
 		assertEquals(esperado,resultado);
 	}
 	
-	//Método --> registrarSocio(Socio misocio)
+	// registrarSocio(Socio misocio)
 	
 	@Test
 	public void test3()
@@ -105,6 +110,9 @@ public class BiblioMovilTest {
 		assertTrue(encontrado);
 		
 	}
+	
+	
+	// getLibros()
 	
 	
 	//Método --> Comprobar_email(String email)
@@ -219,8 +227,45 @@ public class BiblioMovilTest {
 		Libro resultado=miBiblio.Libro("Matemáticas 4");
 		assertSame(esperado,resultado);
 	}
-	 	 	
-	 	
+	 
+	//Método --> setLibros() .getLibros();
+	@Test
+	public void test14()
+	{
+		System.out.println("Estoy en el método setLibros()  y getLibros();");
+		ArrayList<Libro> esperado=listaLibros;
+		miBiblio.setLibros(listaLibros);
+		ArrayList<Libro> resultado=miBiblio.getLibros();
+		assertEquals(esperado,resultado);
+	}
+	
+	//Método -->setSocios() y .getSocios();
+	@Test 
+	public void test15()
+	{
+		System.out.println("Estoy en el método setLibros() y getLibros();");
+		ArrayList<Socio> esperado=listaSocios;
+		miBiblio.setSocios(listaSocios);
+		ArrayList<Socio> resultado=miBiblio.getSocios();
+		assertEquals(esperado,resultado);
+	}
+	
+	@Test 
+	public void test16()
+	{
+		System.out.println("Estoy en el método setLibros() y getLibros();");
+		ArrayList<Socio> esperado=listaSocios;
+		BiblioMovil miBiblio1=new BiblioMovil();
+		ArrayList<Socio> resultado=miBiblio1.getSocios();
+		boolean diferente=false;
+		if(!esperado.equals(resultado))
+		{
+			diferente=true;
+		}
+		
+		assertTrue(diferente);
+	}
+	
 	@After
 	public void after() 
 	{

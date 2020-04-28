@@ -229,6 +229,95 @@ public class PrestamoTest {
 			assertTrue(encontrado);
 	}
 	
+	// Método --> setTituloLibroPrestamo() y getTituloLibroPrestamo()
+	@Test
+	public void test11()
+	{
+		System.out.println("Estoy en metodo test setTituloLibroPrestamo() y  getTituloLibroPrestamo() ");
+		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
+		prestamo.setTituloLibroPrestamo("El Señor de los Anillos");
+		String esperado="El Señor de los Anillos";
+		String resultado=prestamo.getTituloLibroPrestamo();
+		assertEquals(esperado,resultado);
+	}
+	
+	// Método -->setEmailSocio(String emailSocio) y getEmailSocio()
+	@Test
+	public void test12()
+		{
+			System.out.println("Estoy en metodo test setEmailSocio(String emailSocio) y getEmailSocio()");
+			Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
+			prestamo.setEmailSocio("maria@gmail.com");
+			String esperado="maria@gmail.com";
+			String resultado=prestamo.getEmailSocio();
+			assertEquals(esperado,resultado);
+		}
+	
+		
+	// Método --> setLibrosPrestados() y getLibrosPrestados() 
+	@Test
+	public void test13()
+	{
+		System.out.println("Estoy en metodo test setLibrosPrestados() y getLibrosPrestados()");
+		ArrayList<Prestamo> esperado=librosEnPrestamo;
+		librosPrestados.setLibrosPrestados(librosEnPrestamo);
+		ArrayList<Prestamo> resultado=librosPrestados.getLibrosPrestados();
+		assertEquals(esperado,resultado);
+	}
+	
+	// Método --> getFecha_inicio1() 
+	@Test
+	public void test14()
+	{
+		System.out.println("Estoy en metodo test getFecha_inicio1()");
+		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
+		String resultado=prestamo.getFecha_inicio1();
+		String esperado="1/4/2020";
+		assertEquals(esperado,resultado);
+	}
+	
+	// Método --> getFecha_fin1()
+	@Test
+	public void test15()
+	{
+		System.out.println("Estoy en metodo test getFecha_fin1()");
+		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
+		String resultado=prestamo.getFecha_fin1();
+		String esperado="1/5/2020";
+		assertEquals(esperado,resultado);
+	}
+	
+	
+	// Método --> getFecha_inicio()
+	@Test
+	public void test16()
+	{
+		System.out.println("Estoy en metodo test getFecha_inicio()");
+		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
+		prestamo.setFecha_inicio(2020, Calendar.AUGUST, 14);
+		Calendar resultado=prestamo.getFecha_inicio();
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.AUGUST, 14);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);
+		assertEquals(esperado,resultado);
+	}
+	
+	// Método --> getFecha_fin()
+	
+	@Test
+	public void test17()
+	{
+		System.out.println("Estoy en metodo test getFecha_fin()");
+		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
+		prestamo.setFecha_fin(2020, Calendar.AUGUST, 14);
+		Calendar resultado=prestamo.getFecha_fin();
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.SEPTEMBER, 13);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);
+		assertEquals(esperado,resultado);
+	}
 	
 	@After
 	public void after() 
@@ -245,5 +334,3 @@ public class PrestamoTest {
 		
 		
 	}
-
-
