@@ -2,7 +2,12 @@ package Dominio;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class UsuarioTest {
 
@@ -23,14 +28,14 @@ public class UsuarioTest {
 		System.out.println("Estoy metodo before");
 	}
 	
-	//Método --> Registrarse(BiblioMovil miBiblio)
+	//Usuario se registra
 	
 	@Test
-	public void test1()
+	public void test2()
 	{
-		System.out.println("Estoy en metodo test Registrarse(BiblioMovil miBiblio)");
+		System.out.println("Estoy en metodo test tituloCoincide(String email,String titulo) cuando existen email y titulo");
 		
-		Socio esperado=new Socio("Carlos", "Quintero", "02-02-1993", "carlos@gmail.com", "12345");
+		Socio esperado=new Socio("a", "a", "0", "@", "1");
 		
 		boolean verdadero=false;
 		do
@@ -50,18 +55,6 @@ public class UsuarioTest {
 	}
 	
 	
-	@After
-	public void after() 
-	{
-		System.out.println("Estoy metodo after"); 
-		
-	}
-		 			
-	@AfterClass 
-	public static void afterClass() 
-	{
-		System.out.println("Estoy metodo afterClass"); 	
-	}	
 	
 	
 

@@ -41,7 +41,7 @@ public class PrestamoTest {
 	}
 			
 
-	//Método --> registrarSocio(Socio misocio)
+	//Método --> anyadirPrestamo()
 	
 	@Test
 	public void test1()
@@ -172,16 +172,29 @@ public class PrestamoTest {
 		Calendar esperado=Calendar.getInstance();
 		esperado.set(Calendar.MINUTE,0);
  		esperado.set(Calendar.MILLISECOND,0);
-		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villaltamaria@gmail.com", "Lugares asombrosos");
+		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villaltamaria@gmail.com", "La chica de nieve");
+		
+		assertEquals(esperado,resultado);
+	}
+	
+	@Test
+	public void test10()
+	{
+		System.out.println("Estoy en metodo test obtenerFechaPrestamo(String emailSocio,String titulo) cuando NO coincide email NI titulo");
+		
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(Calendar.MINUTE,0);
+ 		esperado.set(Calendar.MILLISECOND,0);
+		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villaltamaria@gmail.com", "La chica de nieve");
 		
 		assertEquals(esperado,resultado);
 	}
 	
 	//Método --> devolverLibro(String emailSocio,String titulo)
 	@Test
-	public void test10()
+	public void test11()
 	{
-		System.out.println("Estoy en método devolverLibro(String emailSocio,String titulo)");	
+		System.out.println("Estoy en método devolverLibro(String emailSocio,String titulo) cuando el email y el titulo existen");	
 		ArrayList<Prestamo> esperado=librosEnPrestamo;
 			
 		Prestamo nuevoPrestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.JANUARY, 4),Prestamo.fecha_fin(2020,Calendar.JANUARY,4),"anto123@gmail.com","El Alquimista");
@@ -214,8 +227,6 @@ public class PrestamoTest {
 				if(!esperado.get(i).toString().equals(resultado.get(i).toString())) 
 				{
 					encontrado=false;
-					System.out.println(esperado.get(i).toString());
-					System.out.println(resultado.get(i).toString());
 				}
 				}
 				catch(IndexOutOfBoundsException e) 
@@ -229,9 +240,156 @@ public class PrestamoTest {
 			assertTrue(encontrado);
 	}
 	
+	@Test
+	public void test12()
+	{
+		System.out.println("Estoy en método devolverLibro(String emailSocio,String titulo) cuando el email no existe y el titulo si");	
+		ArrayList<Prestamo> esperado=librosEnPrestamo;
+			
+		Prestamo nuevoPrestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.JANUARY, 4),Prestamo.fecha_fin(2020,Calendar.JANUARY,4),"anto123@gmail.com","El Alquimista");
+		Prestamo nuevoPrestamoParaDevolver=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.JANUARY, 4),Prestamo.fecha_fin(2020,Calendar.JANUARY,4),"jonh612@outlook.com","El Alquimista");
+		librosPrestados2.anyadirPrestamo(nuevoPrestamo);
+		librosPrestados2.anyadirPrestamo(nuevoPrestamoParaDevolver);
+		librosPrestados2.devolverLibro("estemailnoexiste@gmail.com","El Alquimista");
+		
+		ArrayList<Prestamo> resultado=librosPrestados2.getLibrosPrestados();
+		
+		int i=0;
+		boolean encontrado=true;
+		int maximo=0;
+			
+		if(esperado.size()>resultado.size()) 
+		{
+			maximo=esperado.size();
+		}
+			
+		else 
+		{
+			maximo=resultado.size();
+			System.out.println("Se ha añadido un prestamo");
+		}
+			
+		while(i<maximo) 
+		{
+			try
+			{
+				if(!esperado.get(i).toString().equals(resultado.get(i).toString())) 
+				{
+					encontrado=false;
+				}
+				}
+				catch(IndexOutOfBoundsException e) 
+				{
+					System.out.println("Una de las listas tiene más elementos, no ha añadido el Prestamo");
+					encontrado=false;
+				}
+
+				i++;
+			}
+			assertFalse(encontrado);
+	}
+	
+	@Test
+	public void test13()
+	{
+		System.out.println("Estoy en método devolverLibro(String emailSocio,String titulo) cuando ni el email ni el titulo existen");	
+		ArrayList<Prestamo> esperado=librosEnPrestamo;
+			
+		Prestamo nuevoPrestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.JANUARY, 4),Prestamo.fecha_fin(2020,Calendar.JANUARY,4),"anto123@gmail.com","El Alquimista");
+		Prestamo nuevoPrestamoParaDevolver=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.JANUARY, 4),Prestamo.fecha_fin(2020,Calendar.JANUARY,4),"jonh612@outlook.com","El Alquimista");
+		librosPrestados2.anyadirPrestamo(nuevoPrestamo);
+		librosPrestados2.anyadirPrestamo(nuevoPrestamoParaDevolver);
+		librosPrestados2.devolverLibro("estemailnoexiste@gmail.com","La chica de nieve");
+		
+		ArrayList<Prestamo> resultado=librosPrestados2.getLibrosPrestados();
+		
+		int i=0;
+		boolean encontrado=true;
+		int maximo=0;
+			
+		if(esperado.size()>resultado.size()) 
+		{
+			maximo=esperado.size();
+		}
+			
+		else 
+		{
+			maximo=resultado.size();
+			System.out.println("Se ha añadido un prestamo");
+		}
+			
+		while(i<maximo) 
+		{
+			try
+			{
+				if(!esperado.get(i).toString().equals(resultado.get(i).toString())) 
+				{
+					encontrado=false;
+				}
+				}
+				catch(IndexOutOfBoundsException e) 
+				{
+					System.out.println("Una de las listas tiene más elementos, no ha añadido el Prestamo");
+					encontrado=false;
+				}
+
+				i++;
+			}
+			assertFalse(encontrado);
+	}
+	
+	@Test
+	public void test14()
+	{
+		System.out.println("Estoy en método devolverLibro(String emailSocio,String titulo) cuando el email existe y el titulo no existe");	
+		ArrayList<Prestamo> esperado=librosEnPrestamo;
+			
+		Prestamo nuevoPrestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.JANUARY, 4),Prestamo.fecha_fin(2020,Calendar.JANUARY,4),"anto123@gmail.com","El Alquimista");
+		Prestamo nuevoPrestamoParaDevolver=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.JANUARY, 4),Prestamo.fecha_fin(2020,Calendar.JANUARY,4),"jonh612@outlook.com","El Alquimista");
+		librosPrestados2.anyadirPrestamo(nuevoPrestamo);
+		librosPrestados2.anyadirPrestamo(nuevoPrestamoParaDevolver);
+		librosPrestados2.devolverLibro("jonh612@outlook.com","La chica de nieve");
+		
+		ArrayList<Prestamo> resultado=librosPrestados2.getLibrosPrestados();
+		
+		int i=0;
+		boolean encontrado=true;
+		int maximo=0;
+			
+		if(esperado.size()>resultado.size()) 
+		{
+			maximo=esperado.size();
+		}
+			
+		else 
+		{
+			maximo=resultado.size();
+			System.out.println("Se ha añadido un prestamo");
+		}
+			
+		while(i<maximo) 
+		{
+			try
+			{
+				if(!esperado.get(i).toString().equals(resultado.get(i).toString())) 
+				{
+					encontrado=false;
+				}
+				}
+				catch(IndexOutOfBoundsException e) 
+				{
+					System.out.println("Una de las listas tiene más elementos, no ha añadido el Prestamo");
+					encontrado=false;
+				}
+
+				i++;
+			}
+			assertFalse(encontrado);
+	}
+	
 	// Método --> setTituloLibroPrestamo() y getTituloLibroPrestamo()
 	@Test
-	public void test11()
+	public void test15()
 	{
 		System.out.println("Estoy en metodo test setTituloLibroPrestamo() y  getTituloLibroPrestamo() ");
 		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
@@ -243,7 +401,7 @@ public class PrestamoTest {
 	
 	// Método -->setEmailSocio(String emailSocio) y getEmailSocio()
 	@Test
-	public void test12()
+	public void test16()
 		{
 			System.out.println("Estoy en metodo test setEmailSocio(String emailSocio) y getEmailSocio()");
 			Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
@@ -256,7 +414,7 @@ public class PrestamoTest {
 		
 	// Método --> setLibrosPrestados() y getLibrosPrestados() 
 	@Test
-	public void test13()
+	public void test17()
 	{
 		System.out.println("Estoy en metodo test setLibrosPrestados() y getLibrosPrestados()");
 		ArrayList<Prestamo> esperado=librosEnPrestamo;
@@ -267,7 +425,7 @@ public class PrestamoTest {
 	
 	// Método --> getFecha_inicio1() 
 	@Test
-	public void test14()
+	public void test18()
 	{
 		System.out.println("Estoy en metodo test getFecha_inicio1()");
 		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
@@ -278,7 +436,7 @@ public class PrestamoTest {
 	
 	// Método --> getFecha_fin1()
 	@Test
-	public void test15()
+	public void test19()
 	{
 		System.out.println("Estoy en metodo test getFecha_fin1()");
 		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
@@ -288,9 +446,9 @@ public class PrestamoTest {
 	}
 	
 	
-	// Método --> getFecha_inicio()
+	// Método -->setFecha_inicio() y getFecha_inicio()
 	@Test
-	public void test16()
+	public void test20()
 	{
 		System.out.println("Estoy en metodo test getFecha_inicio()");
 		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
@@ -306,7 +464,7 @@ public class PrestamoTest {
 	// Método --> getFecha_fin()
 	
 	@Test
-	public void test17()
+	public void test21()
 	{
 		System.out.println("Estoy en metodo test getFecha_fin()");
 		Prestamo prestamo=new Prestamo(Prestamo.fecha_inicio(2020, Calendar.APRIL, 1),Prestamo.fecha_fin(2020,Calendar.APRIL,1),"villaltamaria@gmail.com","Lugares asombrosos");
@@ -319,6 +477,501 @@ public class PrestamoTest {
 		assertEquals(esperado,resultado);
 	}
 	
+	//Método--> fecha inicio
+	
+	@Test
+	public void test22()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.JANUARY, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+
+		Calendar resultado=Prestamo.fecha_inicio(2020, Calendar.JANUARY, 1);
+		System.out.println(esperado1);
+		System.out.println(resultado);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test23()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.JANUARY, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+
+		Calendar resultado=Prestamo.fecha_inicio(2021, Calendar.JANUARY, 1);
+		System.out.println(esperado1);
+		System.out.println(resultado);
+		assertEquals(esperado1,resultado);
+	}
+
+	
+	@Test
+	public void test24()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio 28 de febrero año bisiesto");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.FEBRUARY, 28);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2020, Calendar.FEBRUARY, 28);
+		System.out.println(esperado1);
+		System.out.println(resultado);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test25()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio 28 de febrero año NO bisiesto");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.FEBRUARY, 28);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2021, Calendar.FEBRUARY, 28);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test26()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 29 de febrero año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.MARCH, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2021, Calendar.FEBRUARY, 29);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test27()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 29 de febrero año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año bisiesto, se salta al dia proximo, es decir 1ero de marzo
+		esperado.set(2021, Calendar.MARCH, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2021, Calendar.FEBRUARY, 29);		
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test28()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 31 de abril, dia  no existente año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año bisiesto, se salta al dia proximo, es decir 1ero de marzo
+		esperado.set(2020, Calendar.MAY, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2020, Calendar.APRIL, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test29()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 31 de abril, dia  no existente año NO  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.MAY, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2021, Calendar.APRIL, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test30()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 30 de abril, año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.APRIL, 30);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2021, Calendar.APRIL, 30);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test31()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 30 de abril, año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.APRIL, 30);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2020, Calendar.APRIL, 30);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test32()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 31 de febrero, dia  no existente año bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		//Febrero en este año tiene 29 dias, por lo que al tener 2 dias más, los lleva al mes siguientes
+		//Es decir, marzo 2.
+		esperado.set(2020, Calendar.MARCH, 2);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2020, Calendar.FEBRUARY, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test33()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 31 de febrero, dia  no existente año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		//Febrero en este año tiene 28 dias, por lo que al tener 3 dias más, los lleva al mes siguientes
+	   //Es decir, marzo 3.
+		esperado.set(2021, Calendar.MARCH, 3);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2021, Calendar.FEBRUARY, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test34()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio, 31 de diciembre, año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.DECEMBER, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2020, Calendar.DECEMBER, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test35()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio,30 de febrero, dia no existente año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año bisiesto, se salta al dia proximo, es decir 1ero de marzo
+		esperado.set(2020, Calendar.MARCH, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2020, Calendar.FEBRUARY, 30);
+		System.out.println(esperado1.toString());
+		System.out.println(resultado.toString());
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test36()
+	{
+		System.out.println("Estoy en metodo test fecha_inicio,año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año no bisiesto, febrero tiene 28 dias, los dos dias sobrantes, se pasan al mes de marzo, siendo 2 de marzo
+		esperado.set(2021,  Calendar.MARCH, 2);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_inicio(2021,  Calendar.FEBRUARY, 30);
+		System.out.println(esperado1.toString());
+		System.out.println(resultado.toString());
+		assertEquals(esperado1,resultado);
+	}
+	
+	//Método--> fecha_fin
+	@Test
+	public void test37()
+	{
+		System.out.println("Estoy en metodo test fecha_fin ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.JANUARY, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+
+		Calendar resultado=Prestamo.fecha_fin(2020, Calendar.JANUARY, 1);
+		System.out.println(esperado1);
+		System.out.println(resultado);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test38()
+	{
+		System.out.println("Estoy en metodo test fecha_fin ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.JANUARY, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+
+		Calendar resultado=Prestamo.fecha_fin(2021, Calendar.JANUARY, 1);
+		System.out.println(esperado1);
+		System.out.println(resultado);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test39()
+	{
+		System.out.println("Estoy en metodo test fecha_fin 28 de febrero año bisiesto");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.MARCH, 29);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+
+		Calendar resultado=Prestamo.fecha_fin(2020, Calendar.FEBRUARY, 28);
+		System.out.println(esperado1);
+		System.out.println(resultado);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test40()
+	{
+		System.out.println("Estoy en metodo test fecha_fin 28 de febrero año NO bisiesto");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.MARCH, 30);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2021, Calendar.FEBRUARY, 28);
+		assertEquals(esperado1,resultado);
+	}
+	
+
+	@Test
+	public void test41()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 29 de febrero año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.MARCH, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2021, Calendar.FEBRUARY, 29);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test42()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 29 de febrero año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año bisiesto, se salta al dia proximo más los 30 dias, es decir 31 de marzo
+		esperado.set(2021, Calendar.MARCH, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2021, Calendar.FEBRUARY, 29);		
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test43()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 31 de abril, dia  no existente año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año bisiesto, se salta al dia proximo, es decir 1ero de marzo
+		esperado.set(2020, Calendar.MAY, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2020, Calendar.APRIL, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test44()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 31 de abril, dia  no existente año NO  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.MAY, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2021, Calendar.APRIL, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test45()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 30 de abril, año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.MAY, 30);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2021, Calendar.APRIL, 30);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test46()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 30 de abril, año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2020, Calendar.MAY, 30);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2020, Calendar.APRIL, 30);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test47()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 31 de febrero, dia  no existente año bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		//Febrero en este año tiene 29 dias, por lo que al tener 2 dias más, los lleva al mes siguientes
+		//Es decir, marzo 2, mas los 30 dias.
+		esperado.set(2020, Calendar.APRIL, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2020, Calendar.FEBRUARY, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test48()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 31 de febrero, dia  no existente año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		//Febrero en este año tiene 28 dias, por lo que al tener 3 dias más, los lleva al mes siguientes
+	   //Es decir, marzo 3, mas los 30
+		esperado.set(2021, Calendar.APRIL, 2);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2021, Calendar.FEBRUARY, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test49()
+	{
+		System.out.println("Estoy en metodo test fecha_fin, 31 de diciembre, año  bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		esperado.set(2021, Calendar.JANUARY, 30);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2020, Calendar.DECEMBER, 31);
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test50()
+	{
+		System.out.println("Estoy en metodo test fecha_fin,30 de febrero, dia no existente año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año bisiesto, se salta al dia proximo, es decir 1ero de marzo, mas los 30
+		esperado.set(2020, Calendar.MARCH, 31);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2020, Calendar.FEBRUARY, 30);
+		System.out.println(esperado1.toString());
+		System.out.println(resultado.toString());
+		assertEquals(esperado1,resultado);
+	}
+	
+	@Test
+	public void test51()
+	{
+		System.out.println("Estoy en metodo test fecha_fin,30 de febrero,dia no existente año NO bisiesto ");
+		Calendar esperado=Calendar.getInstance();
+		// En año no bisiesto, febrero tiene 28 dias, los dos dias sobrantes, se pasan al mes de marzo, siendo 2 de marzo, mas los 30
+		esperado.set(2021,  Calendar.APRIL, 1);
+		esperado.set(Calendar.MILLISECOND,0);
+		esperado.set(Calendar.SECOND, 0);	
+ 		Date fecha=esperado.getTime();
+ 		Calendar esperado1=Calendar.getInstance();
+ 		esperado1.setTime(fecha);
+		Calendar resultado=Prestamo.fecha_fin(2021,  Calendar.FEBRUARY, 30);
+		System.out.println(esperado1.toString());
+		System.out.println(resultado.toString());
+		assertEquals(esperado1,resultado);
+	}
 	@After
 	public void after() 
 	{
@@ -334,3 +987,5 @@ public class PrestamoTest {
 		
 		
 	}
+
+

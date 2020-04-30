@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import Dominio.Libro.Formato;
 
 public class SancionTest {
  
@@ -57,7 +58,7 @@ public class SancionTest {
 	@Test
 	public void test2()
 	{
-		Sancion esperado=null;
+		Sancion esperado=null;;
 		Sancion resultado = null;
 		System.out.println("Estoy metodo miSancion() cuando la sancion NO existe");
 		
@@ -74,7 +75,7 @@ public class SancionTest {
 		assertEquals(esperado,resultado);
 	}
 	 	
-	// Método --> comprobarSancion(String email)
+	// Metodo --> comprobarSancion(String email)
 	@Test
 	public void test3()
 	{
@@ -93,7 +94,7 @@ public class SancionTest {
 		assertEquals(esperado,resultado);
 	}
 	
-	// Método --> anyadirSancion(Sancion misancion) y getSocio
+	//Método anyadirSancion(Sancion misancion) y getSocio
 	
 	@Test
 	public void test5()
@@ -139,6 +140,54 @@ public class SancionTest {
 			i++;
 		}
 		assertTrue(encontrado);
+	}
+	
+	//Métodos--> getNumero_dias_sancion()
+	
+	@Test
+	public void test6()
+	{
+		System.out.println("Estoy en método getNumero_dias_sancion()");	
+		Sancion nuevaSancion=new Sancion("lau_aguirre@hotmail.com","La chica de nieve");
+		int esperado=10;
+		int resultado=nuevaSancion.getNumero_dias_sancion();
+		assertEquals(esperado,resultado);
+	}
+	
+	//Métodos--> getEmailSocio() 
+	
+	@Test
+	public void test7()
+	{
+		System.out.println("Estoy en método getEmailSocio() ");	
+		Sancion nuevaSancion=new Sancion("lau_aguirre@hotmail.com","La chica de nieve");
+		String esperado="lau_aguirre@hotmail.com";
+		String resultado=nuevaSancion.getEmailSocio();
+		assertEquals(esperado,resultado);
+	}
+	//Métodos--> getTitulo_libro_prestamo() 
+	@Test
+	public void test8()
+	{
+		System.out.println("Estoy en método getTitulo_libro_prestamo() ");	
+		Sancion nuevaSancion=new Sancion("lau_aguirre@hotmail.com","La chica de nieve");
+		String esperado="La chica de nieve";
+		String resultado=nuevaSancion.getTitulo_libro_prestamo();
+		assertEquals(esperado,resultado);
+	}
+	
+	//Métodos--> getMis_sanciones()
+	@Test
+	public void test9()
+	{
+		System.out.println("Estoy en método getMis_sanciones()");	
+		ArrayList<Sancion> esperado=listaSancion;
+		Sancion resultado=new Sancion();
+		resultado.anyadirSancion(new Sancion("lau_aguirre@hotmail.com","La chica de nieve"));
+		ArrayList<Sancion> resultado1=resultado.getMis_sanciones();
+		assertEquals(esperado.toString(),resultado1.toString());
+		
+	
 	}
 	
 	@After

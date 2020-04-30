@@ -243,7 +243,7 @@ public class BiblioMovilTest {
 	@Test 
 	public void test15()
 	{
-		System.out.println("Estoy en el método setLibros() y getLibros();");
+		System.out.println("Estoy en el método setLibros() y getLibros() cuando coinciden los arrays");
 		ArrayList<Socio> esperado=listaSocios;
 		miBiblio.setSocios(listaSocios);
 		ArrayList<Socio> resultado=miBiblio.getSocios();
@@ -253,7 +253,7 @@ public class BiblioMovilTest {
 	@Test 
 	public void test16()
 	{
-		System.out.println("Estoy en el método setLibros() y getLibros();");
+		System.out.println("Estoy en el método setLibros() y getLibros() cuando no coinciden los arrays");
 		ArrayList<Socio> esperado=listaSocios;
 		BiblioMovil miBiblio1=new BiblioMovil();
 		ArrayList<Socio> resultado=miBiblio1.getSocios();
