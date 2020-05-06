@@ -147,7 +147,6 @@ public class PrestamoTest {
 		
 		Calendar esperado=(Prestamo.fecha_fin(2020,Calendar.APRIL,2));
 		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villaltamaria@gmail.com", "Cien años de soledad");
-
 		assertEquals(esperado,resultado);
 	}
 	
@@ -157,8 +156,6 @@ public class PrestamoTest {
 		System.out.println("Estoy en metodo test obtenerFechaPrestamo(String emailSocio,String titulo) cuando NO coincide email y ni titulo");
 		
 		Calendar esperado=Calendar.getInstance();
-		esperado.set(Calendar.MINUTE,0);
- 		esperado.set(Calendar.MILLISECOND,0);
 		Calendar resultado=librosPrestados.obtenerFechaPrestamo("estemailnoexiste@gmail.com.", "Cien años de soledad");
 		
 		assertEquals(esperado,resultado);
@@ -170,8 +167,6 @@ public class PrestamoTest {
 		System.out.println("Estoy en metodo test obtenerFechaPrestamo(String emailSocio,String titulo) cuando SI coincide email y NO titulo");
 		
 		Calendar esperado=Calendar.getInstance();
-		esperado.set(Calendar.MINUTE,0);
- 		esperado.set(Calendar.MILLISECOND,0);
 		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villaltamaria@gmail.com", "La chica de nieve");
 		
 		assertEquals(esperado,resultado);
@@ -183,8 +178,6 @@ public class PrestamoTest {
 		System.out.println("Estoy en metodo test obtenerFechaPrestamo(String emailSocio,String titulo) cuando NO coincide email NI titulo");
 		
 		Calendar esperado=Calendar.getInstance();
-		esperado.set(Calendar.MINUTE,0);
- 		esperado.set(Calendar.MILLISECOND,0);
 		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villaltamaria@gmail.com", "La chica de nieve");
 		
 		assertEquals(esperado,resultado);

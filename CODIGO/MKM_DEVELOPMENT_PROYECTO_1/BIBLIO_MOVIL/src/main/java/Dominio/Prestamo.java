@@ -151,24 +151,41 @@ public class Prestamo {
 	
 	public void verPrestamos(String email)
 	{	
-		System.out.println("*********** PRESTAMOS ***********");
-		System.out.printf("\n%-40s%-40s%-40s", "TITULO" , "FECHA INICIO","FECHA FIN" );
+		
+		System.out.println("*********************** PRESTAMOS ************************");
+		System.out.printf("\n%-40s%-40s%-40s\n", "TITULO" , "FECHA INICIO","FECHA FIN" );
 		
 			for(int i=0; i<librosPrestados.size();i++) 
 			{
 				if(librosPrestados.get(i).getEmailSocio().equalsIgnoreCase(email))
 				{
-					System.out.printf("\n%-40s%-40s%-40s\n",librosPrestados.get(i).getTituloLibroPrestamo(), librosPrestados.get(i).getFecha_inicio1(),librosPrestados.get(i).getFecha_fin1());
+			
+					System.out.printf("\n%-40s%-40s%-40s\n",librosPrestados.get(i).getTituloLibroPrestamo(), librosPrestados.get(i).getFecha_inicio1(),librosPrestados.get(i).getFecha_fin1());	
+						
 				}
+				
 			}
 					
+	}
+	
+	public int numeroPrestamos(String email)
+	{	
+		int contador=0;
+			for(int i=0; i<librosPrestados.size();i++) 
+			{
+				if(librosPrestados.get(i).getEmailSocio().equalsIgnoreCase(email))
+				{
+					contador++;
+				}
+				
+			}
+		return contador;		
 	}
 
 	public Calendar obtenerFechaPrestamo(String emailSocio,String titulo)
 	{
 		Calendar fecha=Calendar.getInstance();
-		fecha.set(Calendar.MINUTE,0);
- 		fecha.set(Calendar.MILLISECOND,0);
+		
 		for(int i=0; i<librosPrestados.size();i++)
 		{
 			if(librosPrestados.get(i).getEmailSocio().equalsIgnoreCase(emailSocio))
@@ -176,6 +193,8 @@ public class Prestamo {
 				if(librosPrestados.get(i).getTituloLibroPrestamo().equalsIgnoreCase(titulo))
 				{
 					fecha=librosPrestados.get(i).getFecha_fin();
+					fecha.set(Calendar.SECOND,0);
+			 		fecha.set(Calendar.MILLISECOND,0);
 				}
 			}
 			

@@ -41,7 +41,7 @@ public class BiblioMovil {
 	{
 		Iterator<Libro> it=libros.iterator();
 		
-		System.out.println("***********CATÁLOGO LIBROS***********");
+		System.out.println("******************* CATÁLOGO LIBROS *******************");
 		System.out.printf("\n%-40s%-40s", "TITULO" , "AUTOR");
 		while(it.hasNext())
 		{
@@ -54,7 +54,7 @@ public class BiblioMovil {
 	{
         Iterator<Libro> it=libros.iterator();
 		
-		System.out.println("***********CATÁLOGO LIBROS***********");
+        System.out.println("*************************** CATÁLOGO LIBROS ***************************");
 		System.out.printf("\n%-40s%-40s%-40s", "TITULO" , "AUTOR","DISPONIBILIDAD");
 		while(it.hasNext())
 		{
