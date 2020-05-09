@@ -302,7 +302,7 @@ public class ClasePrincipal {
 			        		    		continuar=false;
 			        		    		continuar2=true;
 			        		    	}
-			        		        if(resp2.equalsIgnoreCase("SI"))
+			        		    	else if(resp2.equalsIgnoreCase("SI"))
 			        		    	{
 			        		        	
 	                                continuar=true;
@@ -325,7 +325,7 @@ public class ClasePrincipal {
 	     		    	
 	    
 	 		    }
-	 		    if(resp.trim().equalsIgnoreCase("NO"))
+	         	else if(resp.trim().equalsIgnoreCase("NO"))
 	 		    {
 	 		    	continuar=false;
 	 		    	continuar2=true;
@@ -402,8 +402,7 @@ public class ClasePrincipal {
 		    System.out.println("1.Ver catalogo");
 		    System.out.println("2.Alquileres");
 		    System.out.println("3.Sanciones");
-		    System.out.println("4.Cerrar sesión");
-		    System.out.println("5.Salir");
+		    System.out.println("4.Salir");
 		     
 		    System.out.println("Introduzca una opcion:");
 		    try
@@ -436,10 +435,6 @@ public class ClasePrincipal {
 				    	System.out.println("Ha finalizado su sesión");
 				    	continuar3=false;  
 				    	break;
-				    case(5):
-				    	System.out.println("Ha salido del programa");
-				    //	continuar2=false; //Nunca lo hace se cierra..
-				    	break;
 				    default:
 				    	System.out.println("Opción errónea, intente de nuevo");
 				    	break;
@@ -453,7 +448,7 @@ public class ClasePrincipal {
 			}
 		    
 		   
-		}while(opcion2 <1 && opcion2>5 ||continuar3==true|| excepcion==true );
+		}while(opcion2 <1 && opcion2>4 ||continuar3==true|| excepcion==true );
 		
 	}
 
@@ -504,7 +499,7 @@ public class ClasePrincipal {
 		        		    		continuar=false;
 		        		    		continuar2=true;
 		        		    	}
-		        		        if(resp2.trim().equalsIgnoreCase("SI"))
+		        		        else if(resp2.trim().equalsIgnoreCase("SI"))
 		        		    	{
 		        		        	continuar=true;
 		        		    	}
@@ -527,7 +522,7 @@ public class ClasePrincipal {
 	 		    	
 
 			    }
-			    if(resp.trim().equalsIgnoreCase("NO"))
+	     		else if(resp.trim().equalsIgnoreCase("NO"))
 			    {
 			    	continuar=false;
 			    	continuar2=true;
@@ -555,31 +550,45 @@ public class ClasePrincipal {
 		fecha.set(Calendar.MILLISECOND, 0);
 		
 		System.out.println("¿Desea alquilar este libro? SI/NO");
-		String resp3=entrada.nextLine();
-		if(resp3.isEmpty())
+		boolean mostrar=false;
+		do
 		{
-			resp3=entrada.nextLine();
-		}
-
-		if(resp3.equalsIgnoreCase("SI"))
-		{
-			if(sancion.comprobarSancion(email)==false)
+			String resp3=entrada.nextLine();
+			if(resp3.isEmpty())
 			{
-				if(librosBiblio.getDisponibilidad(titulo).equalsIgnoreCase("Disponible"))
+				resp3=entrada.nextLine();
+			}
+
+			if(resp3.equalsIgnoreCase("SI"))
+			{
+				if(sancion.comprobarSancion(email)==false)
 				{
-					miPrestamo.anyadirPrestamo(new Prestamo(Prestamo.fecha_inicio(anyo,mes,dia ),Prestamo.fecha_fin(anyo,mes,dia),email,librosBiblio.Libro(titulo).getTitulo()));
-					System.out.println("Se ha realizado el prestamo con éxito");
+					if(librosBiblio.getDisponibilidad(titulo).equalsIgnoreCase("Disponible"))
+					{
+						miPrestamo.anyadirPrestamo(new Prestamo(Prestamo.fecha_inicio(anyo,mes,dia ),Prestamo.fecha_fin(anyo,mes,dia),email,librosBiblio.Libro(titulo).getTitulo()));
+						System.out.println("Se ha realizado el prestamo con éxito");
+					}
+					else
+					{
+						System.out.println("Este libro no se encuentra disponible, no lo puede alquilar");
+					}
 				}
 				else
 				{
-					System.out.println("Este libro no se encuentra disponible, no lo puede alquilar");
+					System.out.println("Usted tiene una sanción, no puedes alquilar otro libro hasta que finalice la sanción");
 				}
 			}
-			else
-			{
-				System.out.println("Usted tiene una sanción, no puedes alquilar otro libro hasta que finalice la sanción");
-			}
-		}
+			else if(resp3.trim().equalsIgnoreCase("NO"))
+		    {
+				mostrar=false;
+		    }
+		    else
+			 {
+			    System.out.println("Respuesta no permitida, recuerde ingresar SI o NO, intente de nuevo");
+			    mostrar=true;
+			 }
+		}while(mostrar==true);
+		
 		
 	}
 	
