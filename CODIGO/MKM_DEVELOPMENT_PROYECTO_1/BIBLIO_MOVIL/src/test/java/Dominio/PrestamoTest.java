@@ -178,7 +178,7 @@ public class PrestamoTest {
 		System.out.println("Estoy en metodo test obtenerFechaPrestamo(String emailSocio,String titulo) cuando NO coincide email NI titulo");
 		
 		Calendar esperado=Calendar.getInstance();
-		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villaltamaria@gmail.com", "La chica de nieve");
+		Calendar resultado=librosPrestados.obtenerFechaPrestamo("villalgtamaria@gmail.com", "La chica de nieve");
 		
 		assertEquals(esperado,resultado);
 	}
@@ -964,6 +964,24 @@ public class PrestamoTest {
 		System.out.println(esperado1.toString());
 		System.out.println(resultado.toString());
 		assertEquals(esperado1,resultado);
+	}
+	// Método -->  numeroPrestamos(String email)
+	@Test
+	public void test52()
+	{
+		System.out.println("Estoy en metodo test numeroPrestamos(String email) cuando existe el email en prestamos");
+		int esperado=2;
+		int resultado=librosPrestados.numeroPrestamos("villaltamaria@gmail.com");
+		assertEquals(esperado,resultado);
+	}
+	
+	@Test
+	public void test53()
+	{
+		System.out.println("Estoy en metodo test numeroPrestamos(String email) cuando no existe el email en prestamos");
+		int esperado=0;
+		int resultado=librosPrestados.numeroPrestamos("anto123@gmail.com");
+		assertEquals(esperado,resultado);
 	}
 	@After
 	public void after() 
